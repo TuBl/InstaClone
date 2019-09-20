@@ -7,8 +7,12 @@
          <img src="https://instagram.fybz2-2.fna.fbcdn.net/vp/ceb8b7c46d41887ae2831e6a89db5440/5E038B38/t51.2885-19/s150x150/22709172_932712323559405_7810049005848625152_n.jpg?_nc_ht=instagram.fybz2-2.fna.fbcdn.net" alt="logo" class = "rounded-circle">
      </div>
      <div class="col-9 pt-5">
-         <div>
-             <h1>free code camp</h1>
+         <div class="d-flex justify-content-between align-items-baseline">
+             {{-- the echo in php is as follows  --}}
+             {{-- </?=?> remove the / i put it there not to break the comment--}}
+             {{-- in laravel just do {{}} --}}
+             <h1>{{$user->username}}</h1>
+             <a href="#">Add new post</a>
          </div>
          <div class = "d-flex">
              <div class = "pr-5"><strong>153</strong> posts</div>
@@ -16,12 +20,13 @@
              <div class = "pr-5"><strong>229</strong> following</div>
          </div>
      
-             <div class="pt-4 font-weight-bold">freeCodeCamp.org</div>
-             <div >We're a global community of millions of people learning to code together. We're an open source, donor-supported, 501(c)(3) nonprofit.
+             <div class="pt-4 font-weight-bold">{{$user->profile->title}}</div>
+             <div >
+                 {{$user->profile->description}}
              </div>
              <div>
-                <a href="www.freecodecamp.org
-                " style = "color: #003569; font-size 16px;">www.freecodecamp.org
+                <a href="#
+                " style = "color: #003569; font-size 16px;">{{$user->profile->url}}
                </a>
              </div> 
 
