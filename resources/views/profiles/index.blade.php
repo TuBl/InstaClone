@@ -12,10 +12,14 @@
              {{-- </?=?> remove the / i put it there not to break the comment--}}
              {{-- in laravel just do {{}} --}}
              <h1>{{$user->username}}</h1>
-             <a href="#">Add new post</a>
+             <a href="/p/create">Add new post</a>
          </div>
+         {{-- If the user CAN update (policy needs profile/user) --}}
+         @can('update', $user->profile)
+            <a href="/profile/{{$user->id}}/edit">Edit profile</a>
+         @endcan
          <div class = "d-flex">
-             <div class = "pr-5"><strong>153</strong> posts</div>
+         <div class = "pr-5"><strong>{{$user->posts->count()}}</strong> posts</div>
              <div class = "pr-5"><strong>23k</strong> followers</div>
              <div class = "pr-5"><strong>229</strong> following</div>
          </div>
@@ -29,13 +33,18 @@
                 " style = "color: #003569; font-size 16px;">{{$user->profile->url}}
                </a>
              </div> 
-
+ 
         </div>  
     </div>  
             <div class="row pt-4">
-                <div class="col-4"><img src="https://instagram.fybz2-2.fna.fbcdn.net/vp/d76fdbfd285b56f56bf1b15fd6ff701c/5E0FA738/t51.2885-15/e35/69353077_983457791986894_2219053937293359629_n.jpg?_nc_ht=instagram.fybz2-2.fna.fbcdn.net" alt="" class = "w-100 h-100"></div>
-                <div class="col-4"><img src="https://instagram.fybz2-2.fna.fbcdn.net/vp/4f26909ba9b0511a41e69c639dff19db/5DFC9844/t51.2885-15/e35/67737131_193841561646624_2063880671014995153_n.jpg?_nc_ht=instagram.fybz2-2.fna.fbcdn.net" alt="" class = "w-100 h-100"></div>
-                <div class="col-4"><img src="https://instagram.fybz2-2.fna.fbcdn.net/vp/d145dadefb0bb9c2045da94c3862428d/5E09E5A0/t51.2885-15/e35/69875934_3278854528798972_69605946931405030_n.jpg?_nc_ht=instagram.fybz2-2.fna.fbcdn.net" alt="" class = "w-100 h-100"></div>
+                @foreach($user->posts as $post)
+                    <div class="col-4 pb-4">
+                        <a href="/p/{{$post->id}}">
+                            <img src= "/storage/{{$post->image}}" alt="" class = "w-100 h-100">
+                        </a>
+                    </div>
+                @endforeach
+
             </div>
      </div>
  </div>

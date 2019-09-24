@@ -44,6 +44,8 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
     public function posts(){
-        return $this->hasMany(Post::class);
+        // created_at is automaticxally created in the migration
+        //we can use it to order the items
+        return $this->hasMany(Post::class)->orderBy('created_at', 'DESC');
     }
 }
