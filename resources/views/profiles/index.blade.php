@@ -4,24 +4,29 @@
 <div class="container">
  <div class="row">
      <div class="col-3 p-5">
-         <img src="https://instagram.fybz2-2.fna.fbcdn.net/vp/ceb8b7c46d41887ae2831e6a89db5440/5E038B38/t51.2885-19/s150x150/22709172_932712323559405_7810049005848625152_n.jpg?_nc_ht=instagram.fybz2-2.fna.fbcdn.net" alt="logo" class = "rounded-circle">
+     <img src="{{$user->profile->profileImage()}}" alt="logo" class = "rounded-circle w-100">
      </div>
      <div class="col-9 pt-5">
          <div class="d-flex justify-content-between align-items-baseline">
              {{-- the echo in php is as follows  --}}
              {{-- </?=?> remove the / i put it there not to break the comment--}}
              {{-- in laravel just do {{}} --}}
-             <h1>{{$user->username}}</h1>
-             <a href="/p/create">Add new post</a>
+             <div class="d-flex align-items-center">
+                    <div class="h4">{{$user->username}}</div>
+             <follow-button user-id ="{{$user->id}}" follows = {{$follows}}></follow-button>
+             </div>
+             @can('update', $user->profile)
+                <a href="/p/create">Add new post</a>
+             @endcan    
          </div>
          {{-- If the user CAN update (policy needs profile/user) --}}
          @can('update', $user->profile)
             <a href="/profile/{{$user->id}}/edit">Edit profile</a>
          @endcan
          <div class = "d-flex">
-         <div class = "pr-5"><strong>{{$user->posts->count()}}</strong> posts</div>
-             <div class = "pr-5"><strong>23k</strong> followers</div>
-             <div class = "pr-5"><strong>229</strong> following</div>
+         <div class = "pr-5"><strong>{{$postCount}}</strong> posts</div>
+         <div class = "pr-5"><strong>{{$followersCount}}</strong> followers</div>
+         <div class = "pr-5"><strong>{{$followingCount}}</strong> following</div>
          </div>
      
              <div class="pt-4 font-weight-bold">{{$user->profile->title}}</div>

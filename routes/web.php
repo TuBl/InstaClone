@@ -11,14 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
-
+Route::post('follow/{user}', 'FollowsController@store');
+//remember to put the routes that may conflic where the route with static name is on top (order matter)
+// eg: /p/create before /p/{post} because what if {post} = create?
 Route::get('/p/create', 'PostsController@create');
 Route::post("/p", "PostsController@store");
+Route::get('/', 'PostsController@index' );
 Route::get("/p/{post}", "PostsController@show");
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 Route::get("/profile/{user}/edit", "ProfilesController@edit")->name('profile.edit');

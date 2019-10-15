@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<script>
+myBtn = document.getElementById("addBtn");
+const clickHandler = () => {
+    myBtn.disabled = true;
+}
+</script>
 <div class="container">
 <form action="/p" enctype="multipart/form-data" method="post">
     {{-- csrf creates a token for this form to validate the source it is being submitted from --}}
@@ -34,7 +40,7 @@
                 @enderror
             </div>
             <div class="row pt-4">
-                <button class="btn btn-primary">Add new post</button>
+                <button class="btn btn-primary" id = "addBtn" onclick="clickHandler();">Add new post</button>
             </div>
         </div>
     </div>

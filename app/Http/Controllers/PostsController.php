@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Post;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 class PostsController extends Controller
@@ -15,6 +15,18 @@ class PostsController extends Controller
     }
     public function create(){
         return view('posts.create');
+    }
+    public function index(){
+        //pluck is usefull to "pluck" (fetch) a value
+        $users = auth()->user()->following()->pluck('profiles.user_id');
+        // dont forget to import post model
+        // whereIn = we pass in array of data and compare a value to the list of values from the array
+        //latest replaces ->orderBy('created_at', 'DESC')
+        //instead of using ->latest()->get() we use paginate to make it show x# of records/page 
+        // with user helps solving the n+1 (limit = 1) query problem instead of multiple queries, we preload the user
+        // user refers to the relationship in the posts model
+        $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate(3);
+        return view('posts.index', compact('posts'));
     }
 
     public function store(){

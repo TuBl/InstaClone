@@ -37,11 +37,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    //function that runs when new instance of this model is fired up
+    protected static function boot(){
+        //keep parent boot
+        parent::boot();
+        //fire an event when a User is "created" check docs for other events such as saving/saved, creating/created....
+        // this closure accepts a model, we can pass it as a var in this case $user
+        //the profile is created via the relationship, all that is needed is the user ID, u can fill other fields as necessary
+        static::created(function ($user){
+            $user->profile()->create([
+                'title' => $user->username,
+            ]);
+
+        });
+    }
 
     public function profile(){
         //same name space as Profile no need to do App::Profile or 
         // use import statement
         return $this->hasOne(Profile::class);
+    }
+
+    public function following(){
+        return $this->belongsToMany(Profile::class);
     }
     public function posts(){
         // created_at is automaticxally created in the migration
