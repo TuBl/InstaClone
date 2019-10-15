@@ -10,9 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use App\Mail\NewUserWelcomeMail;
 
 Auth::routes();
+// mail temporary oute
+Route::get('/email', function(){
+    return new NewUserWelcomeMail();
+});
 Route::post('follow/{user}', 'FollowsController@store');
 //remember to put the routes that may conflic where the route with static name is on top (order matter)
 // eg: /p/create before /p/{post} because what if {post} = create?

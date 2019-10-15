@@ -6,6 +6,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewUserWelcomeMail;
 
 class User extends Authenticatable
 {
@@ -48,7 +50,8 @@ class User extends Authenticatable
             $user->profile()->create([
                 'title' => $user->username,
             ]);
-
+            Mail::to($user->email)->send(new NewUserWelcomeMail());
+            
         });
     }
 
