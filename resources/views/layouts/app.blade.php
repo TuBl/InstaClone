@@ -26,7 +26,7 @@
                 <a class="navbar-brand d-flex" href="{{ url('/') }}">
                    <div>
                         <img src="/svg/logo.svg" alt="logo" style = "height: 20px; border-right: 1px solid #333;" class = "pr-3">
-                        <span class="pl-3">freeCodeGram</span>
+                        <span class="pl-3">InstaClone</span>
                    </div> 
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

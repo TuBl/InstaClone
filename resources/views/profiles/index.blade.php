@@ -20,6 +20,7 @@
              @endcan    
          </div>
          {{-- If the user CAN update (policy needs profile/user) --}}
+
          @can('update', $user->profile)
             <a href="/profile/{{$user->id}}/edit">Edit profile</a>
          @endcan
